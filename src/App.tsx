@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/Contactus";
+import Register from "./components/Register";
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/description" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
